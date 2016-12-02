@@ -69,7 +69,7 @@ public abstract class BaseFragment
 
   @Override
   public void onError(@NonNull String tag, @Nullable Object obj) {
-    StringBuilder builder = new StringBuilder("");
+    StringBuilder builder = new StringBuilder("ERROR : ");
     if (obj instanceof String) {
       builder.append((String) obj);
     }
@@ -81,10 +81,10 @@ public abstract class BaseFragment
     }
     else {
       if (obj != null) {
-        builder.append(String.valueOf("ERROR : " + obj.getClass().getSimpleName()));
+        builder.append(String.valueOf(obj.getClass().getSimpleName()));
       }
       else {
-        builder.append("ERROR : object is Null.");
+        builder.append("receive object is Null.");
       }
     }
     SwLog.e(tag, builder.toString());
