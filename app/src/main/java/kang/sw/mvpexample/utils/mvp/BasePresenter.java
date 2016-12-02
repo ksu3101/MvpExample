@@ -9,4 +9,5 @@ package kang.sw.mvpexample.utils.mvp;
 public interface BasePresenter {
 
 	void onStart();
+
 }

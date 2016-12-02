@@ -18,6 +18,11 @@ public class MainFragPresenterImpl
     this.view = viewImplInstance;
   }
 
+  @Override
+  public void onStart() {
+    // TODO : load default datas
+  }
+
   public interface View
       extends BaseView {
 
