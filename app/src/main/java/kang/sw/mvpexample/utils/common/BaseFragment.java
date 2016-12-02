@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import kang.sw.mvpexample.utils.mvp.BasePresenter;
+import kang.sw.mvpexample.utils.mvp.RxPresenter;
 import kang.sw.mvpexample.utils.mvp.BaseView;
 
 /**
@@ -22,13 +22,13 @@ import kang.sw.mvpexample.utils.mvp.BaseView;
 public abstract class BaseFragment
     extends Fragment
     implements BaseView {
-  private BasePresenter basePresenter;
+  private RxPresenter rxPresenter;
   private Unbinder      unbinder;
 
   // - - Abstract methods  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   @Nullable
-  public abstract BasePresenter attachPresenter();
+  public abstract RxPresenter attachPresenter();
 
   @LayoutRes
   public abstract int getLayoutResId();
@@ -41,7 +41,7 @@ public abstract class BaseFragment
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(getLayoutResId(), container, false);
     unbinder = ButterKnife.bind(this, view);
-    this.basePresenter = attachPresenter();
+    this.rxPresenter = attachPresenter();
     onCreatedView(view, savedInstanceState);
     return view;
   }
@@ -53,8 +53,8 @@ public abstract class BaseFragment
   @Override
   public void onDestroy() {
     beforeDestroy();
-    if (basePresenter != null) {
-      basePresenter.destroy();
+    if (rxPresenter != null) {
+      rxPresenter.destroy();
     }
     if (unbinder != null) {
       unbinder.unbind();

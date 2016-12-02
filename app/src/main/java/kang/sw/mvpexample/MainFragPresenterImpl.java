@@ -2,7 +2,7 @@ package kang.sw.mvpexample;
 
 import android.support.annotation.NonNull;
 
-import kang.sw.mvpexample.utils.mvp.BasePresenter;
+import kang.sw.mvpexample.utils.mvp.RxPresenter;
 import kang.sw.mvpexample.utils.mvp.BaseView;
 
 /**
@@ -10,7 +10,7 @@ import kang.sw.mvpexample.utils.mvp.BaseView;
  * @since 2016-12-01
  */
 public class MainFragPresenterImpl
-    extends BasePresenter {
+    extends RxPresenter {
 
   private View view;
 
