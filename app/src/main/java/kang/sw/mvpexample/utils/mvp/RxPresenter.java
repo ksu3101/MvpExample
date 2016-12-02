@@ -11,10 +11,12 @@ import rx.subscriptions.CompositeSubscription;
  * @since 2016-12-01
  */
 public abstract class RxPresenter implements BasePresenter {
+
   private CompositeSubscription compositeSubscription;
 
-  public RxPresenter() {
+  public RxPresenter(@NonNull BaseView viewImpl) {
     this.compositeSubscription = new CompositeSubscription();
+    viewImpl.setPresenter(this);
   }
 
   @CallSuper

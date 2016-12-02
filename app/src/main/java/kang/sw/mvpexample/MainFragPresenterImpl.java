@@ -15,6 +15,7 @@ public class MainFragPresenterImpl
   private View view;
 
   public MainFragPresenterImpl(@NonNull View viewImplInstance) {
+    super(viewImplInstance);
     this.view = viewImplInstance;
   }
 
