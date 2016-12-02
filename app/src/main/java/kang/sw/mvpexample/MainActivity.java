@@ -1,12 +1,9 @@
 package kang.sw.mvpexample;
 
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import kang.sw.mvpexample.utils.common.BaseActivity;
-import kang.sw.mvpexample.utils.mvp.BasePresenter;
-
 
 public class MainActivity
     extends BaseActivity {

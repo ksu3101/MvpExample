@@ -2,7 +2,7 @@ package kang.sw.mvpexample.utils.common;
 
 import android.support.annotation.NonNull;
 
-import kang.sw.mvpexample.utils.mvp.BasePresenter;
+import kang.sw.mvpexample.utils.mvp.RxPresenter;
 import rx.Observable;
 import rx.Subscriber;
 
@@ -11,10 +11,10 @@ import rx.Subscriber;
  * @since 2016/08/02
  */
 public class SwObservable {
-  private BasePresenter presenter;
+  private RxPresenter presenter;
   private Observable    observable;
 
-  public SwObservable(@NonNull BasePresenter p, @NonNull Observable o) {
+  public SwObservable(@NonNull RxPresenter p, @NonNull Observable o) {
     this.presenter = p;
     this.observable = o;
   }

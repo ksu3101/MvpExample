@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import kang.sw.mvpexample.utils.common.BaseFragment;
-import kang.sw.mvpexample.utils.mvp.BasePresenter;
+import kang.sw.mvpexample.utils.mvp.RxPresenter;
 
 /**
  * @author KangSungWoo
@@ -19,7 +19,7 @@ public class MainFragment
 
   @Nullable
   @Override
-  public BasePresenter attachPresenter() {
+  public RxPresenter attachPresenter() {
     this.presenter = new MainFragPresenterImpl(this);
     return presenter;
   }
