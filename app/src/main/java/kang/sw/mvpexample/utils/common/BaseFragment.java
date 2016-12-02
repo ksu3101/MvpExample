@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+
+import kang.sw.mvpexample.utils.mvp.BasePresenter;
 import kang.sw.mvpexample.utils.mvp.RxPresenter;
 import kang.sw.mvpexample.utils.mvp.BaseView;
 
@@ -27,8 +29,7 @@ public abstract class BaseFragment
 
   // - - Abstract methods  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  @Nullable
-  public abstract RxPresenter attachPresenter();
+  public abstract <T extends BasePresenter> void setPresenterToChild(T presenter);
 
   @LayoutRes
   public abstract int getLayoutResId();
@@ -41,12 +42,19 @@ public abstract class BaseFragment
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(getLayoutResId(), container, false);
     unbinder = ButterKnife.bind(this, view);
-    this.rxPresenter = attachPresenter();
     onCreatedView(view, savedInstanceState);
     return view;
   }
 
   public void onCreatedView(@Nullable View inflatedView, @Nullable Bundle savedInstanceState) {
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    if(rxPresenter != null) {
+      rxPresenter.onStart();
+    }
   }
 
   @CallSuper
@@ -66,6 +74,12 @@ public abstract class BaseFragment
   }
 
   // - - Implements methods - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  @Override
+  public <T extends BasePresenter> void setPresenter(T presenterImpl) {
+    this.rxPresenter = (RxPresenter) presenterImpl;
+    setPresenterToChild(rxPresenter);
+  }
 
   @Override
   public void onError(@NonNull String tag, @Nullable Object obj) {

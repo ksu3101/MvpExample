@@ -1,9 +1,11 @@
 package kang.sw.mvpexample;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import kang.sw.mvpexample.utils.common.BaseFragment;
+import kang.sw.mvpexample.utils.mvp.BasePresenter;
 import kang.sw.mvpexample.utils.mvp.RxPresenter;
 
 /**
@@ -17,11 +19,15 @@ public class MainFragment
 
   private MainFragPresenterImpl presenter;
 
-  @Nullable
+  public static MainFragment newInstance(@Nullable Bundle args) {
+    MainFragment fragment = new MainFragment();
+    fragment.setArguments(args);
+    return fragment;
+  }
+
   @Override
-  public RxPresenter attachPresenter() {
-    this.presenter = new MainFragPresenterImpl(this);
-    return presenter;
+  public <T extends BasePresenter> void setPresenterToChild(T presenter) {
+    this.presenter = (MainFragPresenterImpl) presenter;
   }
 
   @Override
@@ -29,10 +35,6 @@ public class MainFragment
     return R.layout.main_frag_default;
   }
 
-  public static MainFragment newInstance(@Nullable Bundle args) {
-    MainFragment fragment = new MainFragment();
-    fragment.setArguments(args);
-    return fragment;
-  }
+
 
 }
