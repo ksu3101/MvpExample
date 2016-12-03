@@ -25,7 +25,7 @@ public abstract class BaseFragment
     extends Fragment
     implements BaseView {
   private RxPresenter rxPresenter;
-  private Unbinder      unbinder;
+  private Unbinder    unbinder;
 
   // - - Abstract methods  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -52,7 +52,7 @@ public abstract class BaseFragment
   @Override
   public void onResume() {
     super.onResume();
-    if(rxPresenter != null) {
+    if (rxPresenter != null) {
       rxPresenter.onStart();
     }
   }
