@@ -1,9 +1,9 @@
 package kang.sw.mvpexample;
 
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 
+import kang.sw.mvpexample.utils.ActivityUtils;
 import kang.sw.mvpexample.utils.common.BaseActivity;
 
 public class MainActivity
@@ -23,14 +23,22 @@ public class MainActivity
     // initialize binded views (ToolBar, NavDrawer...)
 
     // TODO : get Fragment instance
-    MainFragment fragment = MainFragment.newInstance(null);	// ex
+    MainFragment fragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.main_frag);
+    if(fragment == null) {
+      // initialize Bundle instance
+      Bundle args = new Bundle();
+
+      // create the fragment
+      fragment = MainFragment.newInstance(args);
+      ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.main_frag);
+    }
 
     // TODO : Create the Fragment Presenter with Saved instance state.
     //presenter = new MainFragPresenterImpl(savedInstanceState, fragment);
-	  presenter = new MainFragPresenterImpl(fragment);		// ex
+    presenter = new MainFragPresenterImpl(fragment);    // ex
 
     // TODO : Load previously saved state, if available.
-    if(savedInstanceState != null) {
+    if (savedInstanceState != null) {
       // restore saved state -> view update
       //presenter.setData();
     }

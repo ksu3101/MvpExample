@@ -35,6 +35,4 @@ public class MainFragment
     return R.layout.main_frag_default;
   }
 
-
-
 }

@@ -12,7 +12,7 @@ import rx.Subscriber;
  */
 public class SwObservable {
   private RxPresenter presenter;
-  private Observable    observable;
+  private Observable  observable;
 
   public SwObservable(@NonNull RxPresenter p, @NonNull Observable o) {
     this.presenter = p;
