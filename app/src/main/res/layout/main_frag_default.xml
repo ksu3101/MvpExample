@@ -1,7 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:background="@color/flat_clouds"
+              android:gravity="center"
+              android:orientation="vertical">
+
+   <TextView
+      android:id="@+id/main_frag_tv"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:gravity="center"
+      android:maxLines="1"
+      android:text="0"
+      android:textColor="@color/black"
+      android:textSize="100sp"/>
+
+   <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="24dp"
+      android:orientation="horizontal"
+      android:paddingLeft="12dp"
+      android:paddingRight="12dp">
+
+      <Button
+         android:id="@+id/main_frag_btn_minus"
+         android:layout_width="0dp"
+         android:layout_height="wrap_content"
+         android:layout_marginRight="6dp"
+         android:layout_weight="1"
+         android:background="@drawable/btn_red"
+         android:text="MINUS"
+         android:textColor="@color/white"
+         android:textSize="18sp"/>
+
+      <Button
+         android:id="@+id/main_frag_btn_plus"
+         android:layout_width="0dp"
+         android:layout_height="wrap_content"
+         android:layout_marginLeft="6dp"
+         android:layout_weight="1"
+         android:background="@drawable/btn_blue"
+         android:text="PLUS"
+         android:textColor="@color/white"
+         android:textSize="18sp"/>
+
+
+   </LinearLayout>
 
 </LinearLayout>

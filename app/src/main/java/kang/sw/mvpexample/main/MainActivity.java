@@ -1,13 +1,15 @@
-package kang.sw.mvpexample;
+package kang.sw.mvpexample.main;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import kang.sw.mvpexample.R;
 import kang.sw.mvpexample.utils.ActivityUtils;
-import kang.sw.mvpexample.utils.common.BaseActivity;
+import kang.sw.mvpexample.utils.common.testing.LogActivity;
 
 public class MainActivity
-    extends BaseActivity {
+    extends LogActivity {
+  private static final String TAG = MainActivity.class.getSimpleName();
 
   private MainFragPresenterImpl presenter;
 
@@ -22,9 +24,9 @@ public class MainActivity
 
     // initialize binded views (ToolBar, NavDrawer...)
 
-    // TODO : get Fragment instance
+    // get Fragment instance
     MainFragment fragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.main_frag);
-    if(fragment == null) {
+    if (fragment == null) {
       // initialize Bundle instance
       Bundle args = new Bundle();
 
@@ -33,21 +35,22 @@ public class MainActivity
       ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.main_frag);
     }
 
-    // TODO : Create the Fragment Presenter with Saved instance state.
-    //presenter = new MainFragPresenterImpl(savedInstanceState, fragment);
-    presenter = new MainFragPresenterImpl(fragment);    // ex
+    // Create the Fragment Presenter with Saved instance state.
+    this.presenter = new MainFragPresenterImpl(fragment);    // ex
 
-    // TODO : Load previously saved state, if available.
+    // Load previously saved state, if available.
     if (savedInstanceState != null) {
       // restore saved state -> view update
-      //presenter.setData();
+      int value = savedInstanceState.getInt(MainFragPresenterImpl.BUNDLE_VALUE, MainFragPresenterImpl.DEF_VALUE);
+      presenter.setValue(value);
     }
 
   }
 
   @Override
   protected void onSaveInstanceState(Bundle outState) {
-    // TODO : save fragment Presenter instance state
+    // save fragment Presenter instance state
+    outState.putInt(MainFragPresenterImpl.BUNDLE_VALUE, presenter.getValue());
     super.onSaveInstanceState(outState);
   }
 

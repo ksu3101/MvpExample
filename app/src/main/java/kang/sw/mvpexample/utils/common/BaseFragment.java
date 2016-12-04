@@ -29,7 +29,7 @@ public abstract class BaseFragment
 
   // - - Abstract methods  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public abstract <T extends BasePresenter> void setPresenterToChild(T presenter);
+  public abstract <P extends BasePresenter> void setPresenterToChild(P presenter);
 
   @LayoutRes
   public abstract int getLayoutResId();
@@ -76,7 +76,7 @@ public abstract class BaseFragment
   // - - Implements methods - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   @Override
-  public <T extends BasePresenter> void setPresenter(T presenterImpl) {
+  public <P extends BasePresenter> void setPresenter(P presenterImpl) {
     this.rxPresenter = (RxPresenter) presenterImpl;
     setPresenterToChild(rxPresenter);
   }

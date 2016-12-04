@@ -2,17 +2,38 @@ apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.0"
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
     defaultConfig {
         applicationId "kang.sw.mvpexample"
-        minSdkVersion 15
-        targetSdkVersion 24
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        // enable java 8 sdk
+        // -> apt를 사용 할 경우 컴파일 안됨. dex파일 생성 방식이 바뀌면서 apt를 사용 할 수 없는 듯?
+//        jackOptions {
+//            enabled true
+//        }
     }
+
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_1_8
+//    }
+
     buildTypes {
+        debug {
+            // Minifying the variant used for tests is not supported when using Jack.
+            minifyEnabled false
+            // Uses new built-in shrinker http://tools.android.com/tech-docs/new-build-system/built-in-shrinker
+            useProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            // testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -22,14 +43,22 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    compile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
+    compile "io.reactivex:rxandroid:$rootProject.rxandroidVersion"
+    compile "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+    compile "com.android.support.test.espresso:espresso-idling-resource:$rootProject.espressoVersion"
+    compile "com.jakewharton:butterknife:$rootProject.butterknifeViersion"
+    apt "com.jakewharton:butterknife-compiler:$rootProject.butterknifeViersion"
+
+    // Dependencies for Android unit tests
+    testCompile "junit:junit:$rootProject.junitVersion"
+
+    // Espresso UI Testing
+    androidTestCompile("com.android.support.test.espresso:espresso-core:$rootProject.espressoVersion", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile "com.android.support:appcompat-v7:${support_library_version}"
-    compile "com.android.support:support-v4:${support_library_version}"
-    compile 'io.reactivex:rxandroid:1.2.1'
-    compile 'com.jakewharton:butterknife:8.4.0'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    apt 'com.jakewharton:butterknife-compiler:8.4.0'
-    testCompile 'junit:junit:4.12'
+    //androidTestCompile "com.android.support.test.espresso:espresso-contrib:$rootProject.espressoVersion"
+    //androidTestCompile "com.android.support.test.espresso:espresso-intents:$rootProject.espressoVersion"
+
 }
