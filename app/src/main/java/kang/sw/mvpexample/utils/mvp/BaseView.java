@@ -9,7 +9,7 @@ import android.support.annotation.Nullable;
  */
 public interface BaseView {
 
-  <T extends BasePresenter> void setPresenter(T presenterImpl);
+  <P extends BasePresenter> void setPresenter(P presenterImpl);
 
   void onError(@NonNull String tag, @Nullable Object obj);
 }
