@@ -36,6 +36,15 @@ public abstract class BaseFragment
 
   // - - Life cycle methods  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+
+  @Override
+  public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+
+    // Retain this fragment across configuration changes.
+    setRetainInstance(true);
+  }
+
   @CallSuper
   @Nullable
   @Override
