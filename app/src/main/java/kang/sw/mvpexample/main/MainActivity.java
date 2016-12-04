@@ -43,9 +43,9 @@ public class MainActivity
     // Load previously saved state, if available.
     if (savedInstanceState != null) {
       // restore saved state -> view update
-      int value = savedInstanceState.getInt(MainFragPresenterImpl.BUNDLE_VALUE, MainFragPresenterImpl.DEF_VALUE);
+      int value = savedInstanceState.getInt(MainFragPresenterImpl.BUNDLE_COUNTER_VALUE, MainFragPresenterImpl.DEF_VALUE);
       Log.i(TAG, "// savedInstanceState is Not Null // saved value = " + value);
-      presenter.setValue(value);
+      presenter.setCounterValue(value);
     }
 
   }
@@ -53,8 +53,8 @@ public class MainActivity
   @Override
   protected void onSaveInstanceState(Bundle outState) {
     // save fragment Presenter instance state
-    final int value = presenter.getValue();
-    outState.putInt(MainFragPresenterImpl.BUNDLE_VALUE, value);
+    final int value = presenter.getCounterValue();
+    outState.putInt(MainFragPresenterImpl.BUNDLE_COUNTER_VALUE, value);
     SwLog.w(TAG, "// onSaveInstanceState() // value = " + value);
     super.onSaveInstanceState(outState);
   }
