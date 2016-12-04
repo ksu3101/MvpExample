@@ -55,10 +55,10 @@ public class MainFragment
       btnMinus.setEnabled(false);
       btnPlus.setEnabled(false);
       if (view.getId() == R.id.main_frag_btn_plus) {
-        presenter.plusValue();
+        presenter.plusCounterValue();
       }
       else if (view.getId() == R.id.main_frag_btn_minus) {
-        presenter.minusValue();
+        presenter.minusCounterValue();
       }
     }
   }
@@ -73,9 +73,9 @@ public class MainFragment
   }
 
   @Override
-  public void updateValue(int value) {
-    SwLog.d(TAG, "// updateValue() // value = " + value);
-    tvMain.setText(String.valueOf(value));
+  public void updateCounterValue(int counterValue) {
+    SwLog.d(TAG, "// updateCounterValue() // value = " + counterValue);
+    tvMain.setText(String.valueOf(counterValue));
     btnPlus.setEnabled(true);
     btnMinus.setEnabled(true);
   }

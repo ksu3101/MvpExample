@@ -21,11 +21,11 @@ public class MainFragPresenterImpl
     extends RxPresenter {
   private static final String TAG = MainFragPresenterImpl.class.getSimpleName();
 
-  public static final String BUNDLE_VALUE = TAG + ".BundleKey_Value";
-  public static final int    DEF_VALUE    = 0;
+  public static final String BUNDLE_COUNTER_VALUE = TAG + ".BundleKey_CounterValue";
+  public static final int    DEF_VALUE            = 0;
 
   private View view;
-  private int  value;
+  private int  counterValue;
 
   public MainFragPresenterImpl(@NonNull View viewImplInstance) {
     super(viewImplInstance);
@@ -34,40 +34,40 @@ public class MainFragPresenterImpl
 
   @Override
   public void onStart() {
-    view.updateValue(value);
+    view.updateCounterValue(counterValue);
   }
 
-  public void resetValue() {
-    this.value = 0;
+  public void resetCounterValue() {
+    this.counterValue = 0;
   }
 
-  public int getValue() {
-    return value;
+  public int getCounterValue() {
+    return counterValue;
   }
 
-  public void setValue(int value) {
-    this.value = value;
+  public void setCounterValue(int counterValue) {
+    this.counterValue = counterValue;
     if (view != null) {
-      view.updateValue(value);
+      view.updateCounterValue(counterValue);
     }
   }
 
-  public void plusValue() {
-    calculateValue(true);
+  public void plusCounterValue() {
+    calculateCounterValue(true);
   }
 
-  public void minusValue() {
-    calculateValue(false);
+  public void minusCounterValue() {
+    calculateCounterValue(false);
   }
 
-  private void calculateValue(final boolean isPlus) {
+  private void calculateCounterValue(final boolean isPlus) {
     final SwObservable observable = new SwObservable(
         this,
         Observable.create(
             new Observable.OnSubscribe<Integer>() {
               @Override
               public void call(Subscriber<? super Integer> subscriber) {
-                subscriber.onNext(isPlus ? ++value : --value);
+                subscriber.onNext(isPlus ? ++counterValue : --counterValue);
               }
             }
         ).throttleFirst(1, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
@@ -81,7 +81,7 @@ public class MainFragPresenterImpl
           public void onCompleted() {
             SwLog.w(TAG, "SwObservable // onCompleted()");
             if (view != null) {
-              view.updateValue(value);
+              view.updateCounterValue(counterValue);
             }
           }
 
@@ -97,7 +97,7 @@ public class MainFragPresenterImpl
           public void onNext(Integer value) {
             SwLog.w(TAG, "SwObservable // onNext()");
             if (view != null) {
-              view.updateValue(value);
+              view.updateCounterValue(value);
             }
             onCompleted();
           }
@@ -108,7 +108,7 @@ public class MainFragPresenterImpl
   public interface View
       extends BaseView {
 
-    void updateValue(int value);
+    void updateCounterValue(int counterValue);
 
   }
 

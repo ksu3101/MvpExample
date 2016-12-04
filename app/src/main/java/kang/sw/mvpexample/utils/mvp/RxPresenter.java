@@ -3,6 +3,7 @@ package kang.sw.mvpexample.utils.mvp;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 
+import kang.sw.mvpexample.utils.common.SwLog;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
@@ -10,7 +11,9 @@ import rx.subscriptions.CompositeSubscription;
  * @author KangSungWoo
  * @since 2016-12-01
  */
-public abstract class RxPresenter implements BasePresenter {
+public abstract class RxPresenter
+    implements BasePresenter {
+  private static final String TAG = RxPresenter.class.getSimpleName();
 
   private CompositeSubscription compositeSubscription;
 

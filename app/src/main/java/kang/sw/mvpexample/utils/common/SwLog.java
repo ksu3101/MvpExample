@@ -25,6 +25,20 @@ public class SwLog {
     }
   }
 
+  public static void i(@NonNull String tag, @Nullable String msg) {
+    if (msg != null) {
+      for (int i = 0; i <= msg.length() / LOG_DEF_LENGTH; i++) {
+        int start = i * LOG_DEF_LENGTH;
+        int end = (i + 1) * LOG_DEF_LENGTH;
+        end = (end > msg.length() ? msg.length() : end);
+        Log.i(tag + "[" + i + "] ", msg.substring(start, end));
+      }
+    }
+    else {
+      Log.i(tag, "Message is Null.");
+    }
+  }
+
   public static void d(@NonNull String tag, @Nullable String msg) {
     Log.d(tag, msg != null ? msg : "Message is Null.");
   }
