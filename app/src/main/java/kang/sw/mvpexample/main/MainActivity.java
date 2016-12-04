@@ -2,9 +2,11 @@ package kang.sw.mvpexample.main;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import kang.sw.mvpexample.R;
 import kang.sw.mvpexample.utils.ActivityUtils;
+import kang.sw.mvpexample.utils.common.SwLog;
 import kang.sw.mvpexample.utils.common.testing.LogActivity;
 
 public class MainActivity
@@ -42,6 +44,7 @@ public class MainActivity
     if (savedInstanceState != null) {
       // restore saved state -> view update
       int value = savedInstanceState.getInt(MainFragPresenterImpl.BUNDLE_VALUE, MainFragPresenterImpl.DEF_VALUE);
+      Log.i(TAG, "// savedInstanceState is Not Null // saved value = " + value);
       presenter.setValue(value);
     }
 
@@ -50,7 +53,9 @@ public class MainActivity
   @Override
   protected void onSaveInstanceState(Bundle outState) {
     // save fragment Presenter instance state
-    outState.putInt(MainFragPresenterImpl.BUNDLE_VALUE, presenter.getValue());
+    final int value = presenter.getValue();
+    outState.putInt(MainFragPresenterImpl.BUNDLE_VALUE, value);
+    SwLog.w(TAG, "// onSaveInstanceState() // value = " + value);
     super.onSaveInstanceState(outState);
   }
 

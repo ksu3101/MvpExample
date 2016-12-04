@@ -11,6 +11,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import kang.sw.mvpexample.R;
 import kang.sw.mvpexample.utils.Utils;
+import kang.sw.mvpexample.utils.common.SwLog;
 import kang.sw.mvpexample.utils.common.testing.LogFragment;
 import kang.sw.mvpexample.utils.mvp.BasePresenter;
 
@@ -29,7 +30,6 @@ public class MainFragment
   @BindView(R.id.main_frag_tv)        TextView tvMain;
   @BindView(R.id.main_frag_btn_plus)  Button   btnPlus;
   @BindView(R.id.main_frag_btn_minus) Button   btnMinus;
-
 
   public static MainFragment newInstance(@Nullable Bundle args) {
     MainFragment fragment = new MainFragment();
@@ -74,6 +74,7 @@ public class MainFragment
 
   @Override
   public void updateValue(int value) {
+    SwLog.d(TAG, "// updateValue() // value = " + value);
     tvMain.setText(String.valueOf(value));
     btnPlus.setEnabled(true);
     btnMinus.setEnabled(true);

@@ -34,7 +34,6 @@ public class MainFragPresenterImpl
 
   @Override
   public void onStart() {
-    this.value = 0;
     view.updateValue(value);
   }
 
@@ -72,7 +71,7 @@ public class MainFragPresenterImpl
               }
             }
         ).throttleFirst(1, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
-                  .delay(2, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
+                  .delay(700, TimeUnit.MILLISECONDS, AndroidSchedulers.mainThread())
                   .subscribeOn(Schedulers.computation())
                   .observeOn(AndroidSchedulers.mainThread())
     );
@@ -88,7 +87,7 @@ public class MainFragPresenterImpl
 
           @Override
           public void onError(Throwable e) {
-            SwLog.w(TAG, "SwObservable // onError()");
+            SwLog.e(TAG, "SwObservable // onError()");
             if (view != null) {
               view.onError(TAG, e);
             }
