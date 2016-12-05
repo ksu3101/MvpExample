@@ -28,6 +28,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    // If you need to add more flavors, consider using flavor dimensions.
+    productFlavors {
+        mock {
+            applicationIdSuffix = ".mock"
+        }
+        prod {
+        }
+    }
 }
 
 dependencies {
@@ -45,6 +54,9 @@ dependencies {
 
     // Dependencies for Android unit tests
     testCompile "junit:junit:$rootProject.junitVersion"
+    // local unit test
+    testCompile "org.mockito:mockito-all:$rootProject.mockitoVersion"
+    testCompile "org.hamcrest:hamcrest-all:$rootProject.hamcrestVersion"
 
     // Espresso UI Testing
     androidTestCompile("com.android.support.test.espresso:espresso-core:$rootProject.espressoVersion", {
