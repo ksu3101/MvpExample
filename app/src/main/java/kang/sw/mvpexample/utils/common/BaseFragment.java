@@ -14,8 +14,8 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 import kang.sw.mvpexample.utils.mvp.BasePresenter;
-import kang.sw.mvpexample.utils.mvp.RxPresenter;
 import kang.sw.mvpexample.utils.mvp.BaseView;
+import kang.sw.mvpexample.utils.mvp.RxPresenter;
 
 /**
  * @author KangSungWoo
@@ -35,7 +35,6 @@ public abstract class BaseFragment
   public abstract int getLayoutResId();
 
   // - - Life cycle methods  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,7 +68,7 @@ public abstract class BaseFragment
   @CallSuper
   @Override
   public void onDestroy() {
-    beforeDestroy();
+    onBeforeDestroy();
     if (rxPresenter != null) {
       rxPresenter.destroy();
     }
@@ -79,7 +78,7 @@ public abstract class BaseFragment
     super.onDestroy();
   }
 
-  public void beforeDestroy() {
+  public void onBeforeDestroy() {
   }
 
   // - - Implements methods - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -114,6 +113,5 @@ public abstract class BaseFragment
   }
 
   // - - Common methods - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 
 }

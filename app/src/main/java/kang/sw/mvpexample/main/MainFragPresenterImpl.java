@@ -1,9 +1,13 @@
 package kang.sw.mvpexample.main;
 
 import android.support.annotation.NonNull;
+import android.support.v4.util.TimeUtils;
 
 import java.util.concurrent.TimeUnit;
 
+import kang.sw.mvpexample.repository.example.ExampleRepository;
+import kang.sw.mvpexample.repository.example.datasource.ExampleLocalRepository;
+import kang.sw.mvpexample.repository.example.datasource.ExampleRemoteRepository;
 import kang.sw.mvpexample.utils.common.SwLog;
 import kang.sw.mvpexample.utils.common.SwObservable;
 import kang.sw.mvpexample.utils.mvp.BaseView;
@@ -102,6 +106,35 @@ public class MainFragPresenterImpl
             onCompleted();
           }
         }
+    );
+  }
+
+  private void exampleFunc() {
+    final SwObservable observable = new SwObservable(
+      this,
+      ExampleRepository.getInstance(ExampleLocalRepository.getInstance(), ExampleRemoteRepository.getInstance())
+        .getExamples()
+        .throttleFirst(1, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.computation())
+        .observeOn(AndroidSchedulers.mainThread())
+    );
+    observable.subscribe(
+      new Subscriber() {
+        @Override
+        public void onCompleted() {
+          // ...
+        }
+
+        @Override
+        public void onError(Throwable e) {
+          // ...
+        }
+
+        @Override
+        public void onNext(Object o) {
+          // ...
+        }
+      }
     );
   }
 

@@ -32,8 +32,11 @@
    <color name="darkGray">#333</color>
 
    <color name="red">#F00</color>
+   <color name="yellow">#FF0</color>
    <color name="blue">#00F</color>
+   <color name="purple">#F0F</color>
    <color name="green">#0F0</color>
+   <color name="cyan">#0FF</color>
    <color name="transparent">@android:color/transparent</color>
 
    <!-- Flat colors -->

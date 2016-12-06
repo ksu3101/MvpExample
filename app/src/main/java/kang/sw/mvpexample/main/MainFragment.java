@@ -10,6 +10,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import kang.sw.mvpexample.R;
+import kang.sw.mvpexample.utils.ActivityUtils;
 import kang.sw.mvpexample.utils.Utils;
 import kang.sw.mvpexample.utils.common.SwLog;
 import kang.sw.mvpexample.utils.common.testing.LogFragment;
