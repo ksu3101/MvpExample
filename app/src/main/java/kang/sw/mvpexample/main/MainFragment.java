@@ -10,23 +10,21 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import kang.sw.mvpexample.R;
-import kang.sw.mvpexample.utils.ActivityUtils;
 import kang.sw.mvpexample.utils.Utils;
 import kang.sw.mvpexample.utils.common.SwLog;
 import kang.sw.mvpexample.utils.common.testing.LogFragment;
-import kang.sw.mvpexample.utils.mvp.BasePresenter;
+import kang.sw.mvpexample.utils.mvp.presenters.BasePresenter;
 
 /**
  * @author KangSungWoo
  * @since 2016-12-01
  */
-
 public class MainFragment
     extends LogFragment
-    implements MainFragPresenterImpl.View {
+    implements MainFragmentPresenter.View {
   private static final String TAG = MainFragment.class.getSimpleName();
 
-  private MainFragPresenterImpl presenter;
+  private MainFragmentPresenter presenter;
 
   @BindView(R.id.main_frag_tv)        TextView tvMain;
   @BindView(R.id.main_frag_btn_plus)  Button   btnPlus;
@@ -39,9 +37,10 @@ public class MainFragment
   }
 
   @Override
-  public <P extends BasePresenter> void setPresenterToChild(P presenter) {
-    if (presenter instanceof MainFragPresenterImpl) {
-      this.presenter = (MainFragPresenterImpl) presenter;
+  public <P extends BasePresenter> void setPresenter(P presenterImpl) {
+    super.setPresenter(presenterImpl);
+    if(presenterImpl instanceof MainFragmentPresenter) {
+      this.presenter = (MainFragmentPresenter) presenterImpl;
     }
   }
 
@@ -75,7 +74,7 @@ public class MainFragment
 
   @Override
   public void updateCounterValue(int counterValue) {
-    SwLog.d(TAG, "// updateCounterValue() // value = " + counterValue);
+    SwLog.i(TAG, "// updateCounterValue() // value = " + counterValue);
     tvMain.setText(String.valueOf(counterValue));
     btnPlus.setEnabled(true);
     btnMinus.setEnabled(true);

@@ -13,23 +13,21 @@ import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-import kang.sw.mvpexample.utils.mvp.BasePresenter;
-import kang.sw.mvpexample.utils.mvp.BaseView;
-import kang.sw.mvpexample.utils.mvp.RxPresenter;
+import kang.sw.mvpexample.utils.mvp.presenters.BasePresenter;
+import kang.sw.mvpexample.utils.mvp.view.BaseView;
+import kang.sw.mvpexample.utils.mvp.presenters.RxPresenter;
 
 /**
  * @author KangSungWoo
  * @since 2016-12-01
  */
 public abstract class BaseFragment
-    extends Fragment
-    implements BaseView {
+  extends Fragment
+  implements BaseView {
   private RxPresenter rxPresenter;
-  private Unbinder    unbinder;
+  private Unbinder unbinder;
 
   // - - Abstract methods  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  public abstract <P extends BasePresenter> void setPresenterToChild(P presenter);
 
   @LayoutRes
   public abstract int getLayoutResId();
@@ -83,10 +81,12 @@ public abstract class BaseFragment
 
   // - - Implements methods - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  @CallSuper
   @Override
   public <P extends BasePresenter> void setPresenter(P presenterImpl) {
-    this.rxPresenter = (RxPresenter) presenterImpl;
-    setPresenterToChild(rxPresenter);
+    if(presenterImpl instanceof RxPresenter) {
+      this.rxPresenter = (RxPresenter) presenterImpl;
+    }
   }
 
   @Override
@@ -94,18 +94,14 @@ public abstract class BaseFragment
     StringBuilder builder = new StringBuilder("ERROR : ");
     if (obj instanceof String) {
       builder.append((String) obj);
-    }
-    else if (obj instanceof CharSequence) {
+    } else if (obj instanceof CharSequence) {
       builder.append((CharSequence) obj.toString());
-    }
-    else if (obj instanceof Throwable) {
+    } else if (obj instanceof Throwable) {
       builder.append(((Throwable) obj).getMessage());
-    }
-    else {
+    } else {
       if (obj != null) {
         builder.append(String.valueOf(obj.getClass().getSimpleName()));
-      }
-      else {
+      } else {
         builder.append("receive object is Null.");
       }
     }

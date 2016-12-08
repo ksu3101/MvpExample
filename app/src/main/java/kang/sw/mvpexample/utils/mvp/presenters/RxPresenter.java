@@ -1,9 +1,9 @@
-package kang.sw.mvpexample.utils.mvp;
+package kang.sw.mvpexample.utils.mvp.presenters;
 
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 
-import kang.sw.mvpexample.utils.common.SwLog;
+import kang.sw.mvpexample.utils.mvp.view.BaseView;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
@@ -11,19 +11,15 @@ import rx.subscriptions.CompositeSubscription;
  * @author KangSungWoo
  * @since 2016-12-01
  */
-public abstract class RxPresenter
-    implements BasePresenter {
-  private static final String TAG = RxPresenter.class.getSimpleName();
-
+public abstract class RxPresenter<V extends BaseView>
+    implements BasePresenter<V> {
   private CompositeSubscription compositeSubscription;
 
-  public RxPresenter(@NonNull BaseView viewImpl) {
+  public RxPresenter() {
     this.compositeSubscription = new CompositeSubscription();
-    viewImpl.setPresenter(this);
   }
 
-  @CallSuper
-  public Subscription addSubscriber(@NonNull final Subscription subscriber) {
+  public final Subscription addSubscriber(@NonNull final Subscription subscriber) {
     if (compositeSubscription != null) {
       compositeSubscription.add(subscriber);
     }
