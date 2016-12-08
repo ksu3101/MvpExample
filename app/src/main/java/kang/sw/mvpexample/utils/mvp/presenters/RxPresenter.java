@@ -27,7 +27,8 @@ public abstract class RxPresenter<V extends BaseView>
   }
 
   @CallSuper
-  public void destroy() {
+  @Override
+  public void unSubscribe() {
     if (compositeSubscription != null) {
       compositeSubscription.unsubscribe();
     }
