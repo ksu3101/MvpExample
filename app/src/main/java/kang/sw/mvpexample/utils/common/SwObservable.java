@@ -2,7 +2,7 @@ package kang.sw.mvpexample.utils.common;
 
 import android.support.annotation.NonNull;
 
-import kang.sw.mvpexample.utils.mvp.RxPresenter;
+import kang.sw.mvpexample.utils.mvp.presenters.RxPresenter;
 import rx.Observable;
 import rx.Subscriber;
 

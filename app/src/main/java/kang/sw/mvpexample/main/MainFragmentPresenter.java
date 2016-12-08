@@ -1,7 +1,7 @@
 package kang.sw.mvpexample.main;
 
 import android.support.annotation.NonNull;
-import android.support.v4.util.TimeUtils;
+import android.support.annotation.Nullable;
 
 import java.util.concurrent.TimeUnit;
 
@@ -10,8 +10,8 @@ import kang.sw.mvpexample.repository.example.datasource.ExampleLocalRepository;
 import kang.sw.mvpexample.repository.example.datasource.ExampleRemoteRepository;
 import kang.sw.mvpexample.utils.common.SwLog;
 import kang.sw.mvpexample.utils.common.SwObservable;
-import kang.sw.mvpexample.utils.mvp.BaseView;
-import kang.sw.mvpexample.utils.mvp.RxPresenter;
+import kang.sw.mvpexample.utils.mvp.view.BaseView;
+import kang.sw.mvpexample.utils.mvp.presenters.StatefulPresenter;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -21,28 +21,54 @@ import rx.schedulers.Schedulers;
  * @author KangSungWoo
  * @since 2016-12-01
  */
-public class MainFragPresenterImpl
-    extends RxPresenter {
-  private static final String TAG = MainFragPresenterImpl.class.getSimpleName();
+public class MainFragmentPresenter
+    extends StatefulPresenter<MainFragmentPresenter.View, MainFragmentState> {
+  private static final String TAG = MainFragmentPresenter.class.getSimpleName();
 
   public static final String BUNDLE_COUNTER_VALUE = TAG + ".BundleKey_CounterValue";
   public static final int    DEF_VALUE            = 0;
 
   private View view;
-  private int  counterValue;
+  private int counterValue;
 
-  public MainFragPresenterImpl(@NonNull View viewImplInstance) {
-    super(viewImplInstance);
+  public MainFragmentPresenter(@NonNull View viewImplInstance) {
     this.view = viewImplInstance;
   }
 
   @Override
-  public void onStart() {
+  public void subscribe(@NonNull View view) {
+    this.subscribe(view, null);
+  }
+
+  @Override
+  public void subscribe(@NonNull View view, @Nullable MainFragmentState state) {
+    this.view = view;
+
+    if(state != null) {
+      this.counterValue = state.getCounterValue();
+    }
+    else {
+      // set default
+      this.counterValue = 0;
+    }
     view.updateCounterValue(counterValue);
+  }
+
+  @Override
+  public MainFragmentState getState() {
+    return new MainFragmentState(counterValue);
+  }
+
+  @Override
+  public void unSubscribe() {
+    this.view = null;
   }
 
   public void resetCounterValue() {
     this.counterValue = 0;
+    if (view != null) {
+      view.updateCounterValue(counterValue);
+    }
   }
 
   public int getCounterValue() {

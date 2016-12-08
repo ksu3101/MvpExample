@@ -13,7 +13,7 @@ public class MainActivity
     extends LogActivity {
   private static final String TAG = MainActivity.class.getSimpleName();
 
-  private MainFragPresenterImpl presenter;
+  private MainFragmentPresenter presenter;
 
   @Override
   public int getLayoutResId() {
@@ -38,26 +38,26 @@ public class MainActivity
     }
 
     // Create the Fragment Presenter with Saved instance state.
-    this.presenter = new MainFragPresenterImpl(fragment);    // ex
+    presenter = new MainFragmentPresenter(fragment);    // ex
 
     // Load previously saved state, if available.
     if (savedInstanceState != null) {
-      // restore saved state -> view update
-      int value = savedInstanceState.getInt(MainFragPresenterImpl.BUNDLE_COUNTER_VALUE, MainFragPresenterImpl.DEF_VALUE);
-      Log.i(TAG, "// savedInstanceState is Not Null // saved value = " + value);
-      presenter.setCounterValue(value);
+      // read from Bundle
+      int value = savedInstanceState.getInt(MainFragmentPresenter.BUNDLE_COUNTER_VALUE, MainFragmentPresenter.DEF_VALUE);
+      presenter.subscribe(fragment, new MainFragmentState(value));
+    }
+    else {
+      presenter.subscribe(fragment);
     }
 
   }
 
   @Override
   protected void onSaveInstanceState(Bundle outState) {
-    // save fragment Presenter instance state
+    // write to Bundle
     final int value = presenter.getCounterValue();
-    outState.putInt(MainFragPresenterImpl.BUNDLE_COUNTER_VALUE, value);
-    SwLog.w(TAG, "// onSaveInstanceState() // value = " + value);
+    outState.putInt(MainFragmentPresenter.BUNDLE_COUNTER_VALUE, presenter.getState().getCounterValue());
     super.onSaveInstanceState(outState);
   }
-
 
 }
