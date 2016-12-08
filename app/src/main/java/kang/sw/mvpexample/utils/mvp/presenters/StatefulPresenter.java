@@ -9,4 +9,5 @@ import kang.sw.mvpexample.utils.mvp.view.BaseView;
 public abstract class StatefulPresenter<V extends BaseView, S extends BaseState>
   extends RxPresenter<V>
   implements IStatefulPresenter<V, S> {
+
 }

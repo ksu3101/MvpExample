@@ -33,6 +33,7 @@ public class MainFragmentPresenter
 
   public MainFragmentPresenter(@NonNull View viewImplInstance) {
     this.view = viewImplInstance;
+    view.setPresenter(this);
   }
 
   @Override
@@ -57,11 +58,6 @@ public class MainFragmentPresenter
   @Override
   public MainFragmentState getState() {
     return new MainFragmentState(counterValue);
-  }
-
-  @Override
-  public void unSubscribe() {
-    this.view = null;
   }
 
   public void resetCounterValue() {

@@ -58,9 +58,6 @@ public abstract class BaseFragment
   @Override
   public void onResume() {
     super.onResume();
-    if (rxPresenter != null) {
-      rxPresenter.onStart();
-    }
   }
 
   @CallSuper
@@ -68,7 +65,7 @@ public abstract class BaseFragment
   public void onDestroy() {
     onBeforeDestroy();
     if (rxPresenter != null) {
-      rxPresenter.destroy();
+      rxPresenter.unSubscribe();
     }
     if (unbinder != null) {
       unbinder.unbind();
@@ -81,11 +78,10 @@ public abstract class BaseFragment
 
   // - - Implements methods - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  @CallSuper
   @Override
-  public <P extends BasePresenter> void setPresenter(P presenterImpl) {
-    if(presenterImpl instanceof RxPresenter) {
-      this.rxPresenter = (RxPresenter) presenterImpl;
+  public void setPresenter(@NonNull BasePresenter presenter) {
+    if(presenter instanceof RxPresenter) {
+      this.rxPresenter = (RxPresenter) presenter;
     }
   }
 

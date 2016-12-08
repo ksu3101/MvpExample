@@ -37,10 +37,10 @@ public class MainFragment
   }
 
   @Override
-  public <P extends BasePresenter> void setPresenter(P presenterImpl) {
-    super.setPresenter(presenterImpl);
-    if(presenterImpl instanceof MainFragmentPresenter) {
-      this.presenter = (MainFragmentPresenter) presenterImpl;
+  public void setPresenter(@NonNull BasePresenter presenter) {
+    super.setPresenter(presenter);
+    if(presenter instanceof MainFragmentPresenter) {
+      this.presenter = (MainFragmentPresenter) presenter;
     }
   }
 
