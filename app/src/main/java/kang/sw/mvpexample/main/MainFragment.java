@@ -11,8 +11,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import kang.sw.mvpexample.R;
 import kang.sw.mvpexample.utils.Utils;
+import kang.sw.mvpexample.utils.common.BaseFragment;
 import kang.sw.mvpexample.utils.common.SwLog;
-import kang.sw.mvpexample.utils.common.testing.LogFragment;
 import kang.sw.mvpexample.utils.mvp.presenters.BasePresenter;
 
 /**
@@ -20,7 +20,7 @@ import kang.sw.mvpexample.utils.mvp.presenters.BasePresenter;
  * @since 2016-12-01
  */
 public class MainFragment
-    extends LogFragment
+    extends BaseFragment
     implements MainFragmentPresenter.View {
   private static final String TAG = MainFragment.class.getSimpleName();
 
