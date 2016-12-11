@@ -2,15 +2,13 @@ package kang.sw.mvpexample.main;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import kang.sw.mvpexample.R;
 import kang.sw.mvpexample.utils.ActivityUtils;
-import kang.sw.mvpexample.utils.common.SwLog;
-import kang.sw.mvpexample.utils.common.testing.LogActivity;
+import kang.sw.mvpexample.utils.common.BaseActivity;
 
 public class MainActivity
-    extends LogActivity {
+    extends BaseActivity {
   private static final String TAG = MainActivity.class.getSimpleName();
 
   private MainFragmentPresenter presenter;
@@ -38,25 +36,22 @@ public class MainActivity
     }
 
     // Create the Fragment Presenter with Saved instance state.
-    presenter = new MainFragmentPresenter(fragment);    // ex
+    presenter = new MainFragmentPresenter(fragment);
 
     // Load previously saved state, if available.
     if (savedInstanceState != null) {
       // read from Bundle
       int value = savedInstanceState.getInt(MainFragmentPresenter.BUNDLE_COUNTER_VALUE, MainFragmentPresenter.DEF_VALUE);
-      presenter.subscribe(fragment, new MainFragmentState(value));
+      presenter.setCounterValue(value);
     }
-    else {
-      presenter.subscribe(fragment);
-    }
+    presenter.subscribe(fragment);
 
   }
 
   @Override
   protected void onSaveInstanceState(Bundle outState) {
     // write to Bundle
-    final int value = presenter.getCounterValue();
-    outState.putInt(MainFragmentPresenter.BUNDLE_COUNTER_VALUE, presenter.getState().getCounterValue());
+    outState.putInt(MainFragmentPresenter.BUNDLE_COUNTER_VALUE, presenter.getCounterValue());
     super.onSaveInstanceState(outState);
   }
 

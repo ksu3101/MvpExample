@@ -15,8 +15,9 @@ public abstract class RxPresenter<V extends BaseView>
     implements BasePresenter<V> {
   private CompositeSubscription compositeSubscription;
 
-  public RxPresenter() {
+  public RxPresenter(@NonNull V view) {
     this.compositeSubscription = new CompositeSubscription();
+    view.setPresenter(this);
   }
 
   public final Subscription addSubscriber(@NonNull final Subscription subscriber) {

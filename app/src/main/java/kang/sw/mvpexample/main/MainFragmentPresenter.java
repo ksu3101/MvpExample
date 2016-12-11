@@ -1,7 +1,6 @@
 package kang.sw.mvpexample.main;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import java.util.concurrent.TimeUnit;
 
@@ -10,8 +9,8 @@ import kang.sw.mvpexample.repository.example.datasource.ExampleLocalRepository;
 import kang.sw.mvpexample.repository.example.datasource.ExampleRemoteRepository;
 import kang.sw.mvpexample.utils.common.SwLog;
 import kang.sw.mvpexample.utils.common.SwObservable;
+import kang.sw.mvpexample.utils.mvp.presenters.RxPresenter;
 import kang.sw.mvpexample.utils.mvp.view.BaseView;
-import kang.sw.mvpexample.utils.mvp.presenters.StatefulPresenter;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -22,7 +21,7 @@ import rx.schedulers.Schedulers;
  * @since 2016-12-01
  */
 public class MainFragmentPresenter
-    extends StatefulPresenter<MainFragmentPresenter.View, MainFragmentState> {
+    extends RxPresenter<MainFragmentPresenter.View> {
   private static final String TAG = MainFragmentPresenter.class.getSimpleName();
 
   public static final String BUNDLE_COUNTER_VALUE = TAG + ".BundleKey_CounterValue";
@@ -32,32 +31,13 @@ public class MainFragmentPresenter
   private int counterValue;
 
   public MainFragmentPresenter(@NonNull View viewImplInstance) {
+    super(viewImplInstance);
     this.view = viewImplInstance;
-    view.setPresenter(this);
   }
 
   @Override
   public void subscribe(@NonNull View view) {
-    this.subscribe(view, null);
-  }
-
-  @Override
-  public void subscribe(@NonNull View view, @Nullable MainFragmentState state) {
-    this.view = view;
-
-    if(state != null) {
-      this.counterValue = state.getCounterValue();
-    }
-    else {
-      // set default
-      this.counterValue = 0;
-    }
     view.updateCounterValue(counterValue);
-  }
-
-  @Override
-  public MainFragmentState getState() {
-    return new MainFragmentState(counterValue);
   }
 
   public void resetCounterValue() {
