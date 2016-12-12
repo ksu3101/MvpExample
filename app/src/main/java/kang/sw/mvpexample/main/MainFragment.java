@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import kang.sw.mvpexample.R;
@@ -24,7 +26,7 @@ public class MainFragment
     implements MainFragmentPresenter.View {
   private static final String TAG = MainFragment.class.getSimpleName();
 
-  private MainFragmentPresenter presenter;
+  @Inject MainFragmentPresenter presenter;
 
   @BindView(R.id.main_frag_tv)        TextView tvMain;
   @BindView(R.id.main_frag_btn_plus)  Button   btnPlus;
@@ -39,7 +41,7 @@ public class MainFragment
   @Override
   public void setPresenter(@NonNull BasePresenter presenter) {
     super.setPresenter(presenter);
-    if(presenter instanceof MainFragmentPresenter) {
+    if (presenter instanceof MainFragmentPresenter) {
       this.presenter = (MainFragmentPresenter) presenter;
     }
   }

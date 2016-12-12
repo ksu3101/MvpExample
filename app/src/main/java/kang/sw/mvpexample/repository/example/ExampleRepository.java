@@ -2,6 +2,7 @@ package kang.sw.mvpexample.repository.example;
 
 import android.support.annotation.NonNull;
 
+import kang.sw.mvpexample.repository.Identity;
 import rx.Observable;
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -65,7 +66,7 @@ public class ExampleRepository implements IExampleRepository {
             .doOnNext(new Action1<ExampleVO>() {
               @Override
               public void call(ExampleVO exampleVO) {
-                cachedDatas.put(exampleVO.getId(), exampleVO);
+                cachedDatas.put(exampleVO.get_id(), exampleVO);
               }
             }).toList();
         }
@@ -82,7 +83,7 @@ public class ExampleRepository implements IExampleRepository {
               @Override
               public void call(ExampleVO exampleVO) {
                 localRepository.saveExample(exampleVO);
-                cachedDatas.put(exampleVO.getId(), exampleVO);
+                cachedDatas.put(exampleVO.get_id(), exampleVO);
               }
             }).toList();
         }

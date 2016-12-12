@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public class ExampleVO extends Identity {
 
-  String title;
-  String description;
+  private String title;
+  private String description;
 
 }

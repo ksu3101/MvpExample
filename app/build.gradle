@@ -54,7 +54,8 @@ dependencies {
     annotationProcessor 'com.google.dagger:dagger-compiler:2.8'
 
     // Lombok
-    provided "org.projectlombok:lombok:1.12.6"
+    provided "org.projectlombok:lombok:1.16.12"
+    provided 'org.glassfish:javax.annotation:10.0-b28'
 
     // Butterknife (annotation processor 를 이용. java 8 사용 시 apt지원 하지 않으므로 변경 함)
     compile "com.jakewharton:butterknife:$rootProject.butterknifeViersion"

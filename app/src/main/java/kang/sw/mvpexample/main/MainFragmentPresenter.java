@@ -1,8 +1,11 @@
 package kang.sw.mvpexample.main;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.util.concurrent.TimeUnit;
+
+import javax.inject.Inject;
 
 import kang.sw.mvpexample.repository.example.ExampleRepository;
 import kang.sw.mvpexample.repository.example.datasource.ExampleLocalRepository;
@@ -28,8 +31,9 @@ public class MainFragmentPresenter
   public static final int    DEF_VALUE            = 0;
 
   private View view;
-  private int counterValue;
+  private int  counterValue;
 
+  @Inject
   public MainFragmentPresenter(@NonNull View viewImplInstance) {
     super(viewImplInstance);
     this.view = viewImplInstance;
@@ -37,7 +41,6 @@ public class MainFragmentPresenter
 
   @Override
   public void subscribe(@NonNull View view) {
-    view.updateCounterValue(counterValue);
   }
 
   public void resetCounterValue() {
@@ -113,30 +116,30 @@ public class MainFragmentPresenter
 
   private void exampleFunc() {
     final SwObservable observable = new SwObservable(
-      this,
-      ExampleRepository.getInstance(ExampleLocalRepository.getInstance(), ExampleRemoteRepository.getInstance())
-        .getExamples()
-        .throttleFirst(1, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
-        .subscribeOn(Schedulers.computation())
-        .observeOn(AndroidSchedulers.mainThread())
+        this,
+        ExampleRepository.getInstance(ExampleLocalRepository.getInstance(), ExampleRemoteRepository.getInstance())
+                         .getExamples()
+                         .throttleFirst(1, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
+                         .subscribeOn(Schedulers.computation())
+                         .observeOn(AndroidSchedulers.mainThread())
     );
     observable.subscribe(
-      new Subscriber() {
-        @Override
-        public void onCompleted() {
-          // ...
-        }
+        new Subscriber() {
+          @Override
+          public void onCompleted() {
+            // ...
+          }
 
-        @Override
-        public void onError(Throwable e) {
-          // ...
-        }
+          @Override
+          public void onError(Throwable e) {
+            // ...
+          }
 
-        @Override
-        public void onNext(Object o) {
-          // ...
+          @Override
+          public void onNext(Object o) {
+            // ...
+          }
         }
-      }
     );
   }
 
