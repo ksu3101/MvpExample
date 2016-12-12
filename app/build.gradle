@@ -12,15 +12,15 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         // enable java 8 sdk
-        jackOptions {
-            enabled true
-        }
+        //jackOptions {
+        //    enabled true
+        //}
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_1_8
+//    }
 
     buildTypes {
         release {
@@ -48,6 +48,13 @@ dependencies {
     compile "io.reactivex:rxandroid:$rootProject.rxandroidVersion"
     compile "com.github.bumptech.glide:glide:$rootProject.glideVersion"
     compile "com.android.support.test.espresso:espresso-idling-resource:$rootProject.espressoVersion"
+
+    // Dagger 2 (https://github.com/google/dagger)
+    compile 'com.google.dagger:dagger:2.8'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.8'
+
+    // Lombok
+    provided "org.projectlombok:lombok:1.12.6"
 
     // Butterknife (annotation processor 를 이용. java 8 사용 시 apt지원 하지 않으므로 변경 함)
     compile "com.jakewharton:butterknife:$rootProject.butterknifeViersion"
