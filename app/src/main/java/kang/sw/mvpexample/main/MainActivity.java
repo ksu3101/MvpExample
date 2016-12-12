@@ -2,6 +2,9 @@ package kang.sw.mvpexample.main;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
+
+import javax.inject.Inject;
 
 import kang.sw.mvpexample.R;
 import kang.sw.mvpexample.utils.ActivityUtils;
@@ -11,7 +14,7 @@ public class MainActivity
     extends BaseActivity {
   private static final String TAG = MainActivity.class.getSimpleName();
 
-  private MainFragmentPresenter presenter;
+  @Inject MainFragmentPresenter presenter;
 
   @Override
   public int getLayoutResId() {
@@ -36,7 +39,11 @@ public class MainActivity
     }
 
     // Create the Fragment Presenter with Saved instance state.
-    presenter = new MainFragmentPresenter(fragment);
+    //presenter = new MainFragmentPresenter(fragment);
+    DaggerMainFragmentComponent.builder()
+                               .mainFragmentPresenterModule(new MainFragmentPresenterModule(fragment))
+                               .build()
+                               .inject(this);
 
     // Load previously saved state, if available.
     if (savedInstanceState != null) {
@@ -44,7 +51,9 @@ public class MainActivity
       int value = savedInstanceState.getInt(MainFragmentPresenter.BUNDLE_COUNTER_VALUE, MainFragmentPresenter.DEF_VALUE);
       presenter.setCounterValue(value);
     }
-    presenter.subscribe(fragment);
+    else {
+      presenter.subscribe(fragment);
+    }
 
   }
 
