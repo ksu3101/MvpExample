@@ -38,7 +38,7 @@ public class MainActivity
       ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.main_frag);
     }
 
-    // Create the Fragment Presenter with Saved instance state.
+    // Create the Fragment Presenter.
     //presenter = new MainFragmentPresenter(fragment);
     DaggerMainFragmentComponent.builder()
                                .mainFragmentPresenterModule(new MainFragmentPresenterModule(fragment))
