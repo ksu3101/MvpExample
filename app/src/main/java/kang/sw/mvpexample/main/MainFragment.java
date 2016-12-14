@@ -3,6 +3,7 @@ package kang.sw.mvpexample.main;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,6 +13,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.OnClick;
 import kang.sw.mvpexample.R;
+import kang.sw.mvpexample.repository.example.UserConstant;
+import kang.sw.mvpexample.repository.example.UserInfo;
 import kang.sw.mvpexample.utils.Utils;
 import kang.sw.mvpexample.utils.common.BaseFragment;
 import kang.sw.mvpexample.utils.common.SwLog;
@@ -51,6 +54,15 @@ public class MainFragment
     return R.layout.main_frag_default;
   }
 
+  @Override
+  public void onResume() {
+    super.onResume();
+    if(presenter != null) {
+      presenter.exampleFunc2(UserConstant.USER_JSON_01);
+      presenter.exampleFunc2(UserConstant.USER_JSON_02);
+    }
+  }
+
   @OnClick({R.id.main_frag_btn_plus, R.id.main_frag_btn_minus})
   void onClickButtons(View view) {
     if (view != null) {
@@ -82,4 +94,13 @@ public class MainFragment
     btnMinus.setEnabled(true);
   }
 
+  @Override
+  public void resultOfJsonParsed(@Nullable UserInfo userInfo) {
+    if(userInfo != null) {
+      Log.d(TAG, "// received UserInfo object = " + userInfo.toString());
+    }
+    else {
+      Log.e(TAG, "// parse UserInfo failed.. received object is Null.");
+    }
+  }
 }

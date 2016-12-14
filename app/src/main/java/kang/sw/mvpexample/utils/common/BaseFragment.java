@@ -55,11 +55,6 @@ public abstract class BaseFragment
   public void onCreatedView(@Nullable View inflatedView, @Nullable Bundle savedInstanceState) {
   }
 
-  @Override
-  public void onResume() {
-    super.onResume();
-  }
-
   @CallSuper
   @Override
   public void onDestroy() {
