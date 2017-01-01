@@ -1,6 +1,7 @@
-package kang.sw.mvpexample.utils.common;
+package kang.sw.mvpexample.utils.di.module;
 
 import android.app.Application;
+import android.content.Context;
 
 import dagger.Module;
 import dagger.Provides;
@@ -14,16 +15,16 @@ import javax.inject.Singleton;
 @Module
 public class AppModule {
 
-  Application application;
+  private Context context;
 
-  public AppModule(Application application) {
-    this.application = application;
+  public AppModule(Context context) {
+    this.context = context;
   }
 
   @Provides
   @Singleton
-  public Application getApplication() {
-    return application;
+  public Context provideContext() {
+    return context;
   }
 
 }

@@ -1,7 +1,7 @@
 package kang.sw.mvpexample.utils.network;
 
 import dagger.Component;
-import kang.sw.mvpexample.utils.common.AppModule;
+import kang.sw.mvpexample.utils.di.module.AppModule;
 import retrofit2.Retrofit;
 
 import javax.inject.Singleton;

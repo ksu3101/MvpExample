@@ -1,6 +1,8 @@
-package kang.sw.mvpexample.utils.common;
+package kang.sw.mvpexample.utils.di.component;
 
 import dagger.Component;
+import kang.sw.mvpexample.utils.common.BaseActivity;
+import kang.sw.mvpexample.utils.di.module.AppModule;
 
 import javax.inject.Singleton;
 
@@ -12,6 +14,5 @@ import javax.inject.Singleton;
 @Component(modules = AppModule.class)
 public interface AppComponent {
 
-  void inject(BaseActivity activity);
 
 }
