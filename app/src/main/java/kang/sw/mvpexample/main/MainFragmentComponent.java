@@ -1,7 +1,7 @@
 package kang.sw.mvpexample.main;
 
 import dagger.Component;
-import kang.sw.mvpexample.utils.common.FragmentScope;
+import kang.sw.mvpexample.utils.di.scope.FragmentScope;
 
 /**
  * @author KangSung-Woo

@@ -2,6 +2,7 @@ package kang.sw.mvpexample.utils.common;
 
 import android.app.Application;
 
+import kang.sw.mvpexample.utils.di.module.AppModule;
 import kang.sw.mvpexample.utils.network.DaggerNetComponent;
 import kang.sw.mvpexample.utils.network.NetComponent;
 import kang.sw.mvpexample.utils.network.NetModule;
